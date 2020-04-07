@@ -68,6 +68,36 @@ public class TwoPoints {
         int yDiff = points[0].y - points[1].y;
 
         result = xDiff / yDiff;
+        //--------------------------------------------------------------
+        //NEW CODE
+        //--------------------------------------------------------------
+
+        //1. find xDiff and yDiff
+        //int xDiff = points[1].x - points[0].x;
+        //int yDiff = points[1].y - points[0].y;
+        //2. Make first assertions
+        //CASE 1: yDiff is zero
+        //if (yDiff == 0)
+       //{
+            //return result;
+        //}
+        //CASE 2: xDiff is zero
+        //if (xDiff == 0)
+        //{
+            //if(yDiff > 0)
+            //{
+                //return Double.POSITIVE_INFINITY;
+            //}
+            //else
+            //{
+                //return Double.NEGATIVE_INFINITY;
+            //}
+        //}
+        //else
+        //{
+            //result = (double) xDiff/yDiff;
+        //}
+
         return result;
     }
 

@@ -4,6 +4,8 @@ import android.graphics.Point;
 
 import org.junit.Test;
 
+import java.util.Random;
+
 import static org.junit.Assert.*;
 
 public class TwoPointsTest {
@@ -37,22 +39,71 @@ public class TwoPointsTest {
     }
 
     @Test
-    public void randomValue() {
+    public void randomValue() throws Exception
+    {
+        TwoPoints testPoints = new TwoPoints();
+        testPoints.randomValue(0);
+        testPoints.randomValue(1);
+        //Give the values to the points
+        Point p1 = testPoints.getPoint(0);
+        Point p2 = testPoints.getPoint(1);
+        assertEquals("randomValue does not equal",testPoints.getPoint(0).x,p1.x);
+        assertEquals("randomValue does not equal",testPoints.getPoint(0).y,p1.y);
+        assertEquals("randomValue does not equal",testPoints.getPoint(1).x,p2.x);
+        assertEquals("randomValue does not equal",testPoints.getPoint(1).y,p2.y);
     }
 
     @Test
-    public void setOrigin() {
+    public void setOrigin() throws Exception
+    {
+        TwoPoints testPoints = new TwoPoints();
+        //Start by creating a random
+        testPoints.setOrigin(0);
+        testPoints.setOrigin(1);
+        //Get those points ya yeet
+        Point p1 = testPoints.getPoint(0);
+        Point p2 = testPoints.getPoint(1);
+        assertEquals("setOrigin does not equal",testPoints.getPoint(0).x,p1.x);
+        assertEquals("setOrigin does not equal",testPoints.getPoint(0).y,p1.y);
+        assertEquals("setOrigin does not equal",testPoints.getPoint(1).x,p2.x);
+        assertEquals("setOrigin does not equal",testPoints.getPoint(1).y,p2.y);
+
     }
 
     @Test
-    public void copy() {
+    public void copy() throws Exception
+    {
+        //CASE 1: 0 copies 1
+        TwoPoints testPoint1 = new TwoPoints();
+        testPoint1.randomValue(0);
+        testPoint1.randomValue(1);
+        testPoint1.copy(1,0);
+        Point p1 = testPoint1.getPoint(0);
+        Point p2 = testPoint1.getPoint(1);
+        assertEquals("The copy machine is broken", p2.x,p1.x);
+        assertEquals("The copy machine is broken", p2.y,p1.y);
+        //CASE 2: 1 copies 0
+        testPoint1.randomValue(0);
+        testPoint1.randomValue(1);
+        testPoint1.copy(0,1);
+        p1 = testPoint1.getPoint(0);
+        p2 = testPoint1.getPoint(1);
+        assertEquals("The copy machine is broken", p1.x,p2.x);
+        assertEquals("The copy machine is broken", p1.y,p2.y);
     }
-
-    //I will do distance and slope
 
     @Test
     public void distance()
     {
+        TwoPoints testPoints1 = new TwoPoints();
+        testPoints1.randomValue(0);
+        testPoints1.randomValue(1);
+        Point p1 = testPoints1.getPoint(0);
+        Point p2 = testPoints1.getPoint(1);
+        int xDiff = p2.x - p1.x;
+        int yDiff = p2.y - p1.y;
+        double expResult = Math.sqrt((double)(xDiff * xDiff) + (yDiff * yDiff));
+        assertEquals("Is that the distance",expResult,testPoints1.distance(),0.0001);
 
     }
 
@@ -63,11 +114,8 @@ public class TwoPointsTest {
         //case 1: normal
         //case 2: same y, different x
         //case 3: slope is undefined, same x
-        TwoPoints testPoints1 = new TwoPoints();
         TwoPoints testPoints2 = new TwoPoints();
         TwoPoints testPoints3 = new TwoPoints();
-        testPoints1.setPoint(0,1,7);
-        testPoints1.setPoint(1,4,3);
         testPoints2.setPoint(0,1,7);
         testPoints2.setPoint(1,4,7);
         testPoints3.setPoint(0,5,1);
@@ -75,27 +123,20 @@ public class TwoPointsTest {
         //for the tests, I will get the same method from TwoPoints.java
         //and get the expected answers from some professional thing
         //lol totally not wolfram alpha
-        //1. Make points and get the points from the testpoints
-        //p1 and p2 rep test 1, p3 and p4 test 2, p5 and p6 test 3
-        Point p1 = testPoints1.getPoint(0);
-        Point p2 = testPoints1.getPoint(1);
-        Point p3 = testPoints2.getPoint(0);
-        Point p4 = testPoints2.getPoint(1);
-        Point p5 = testPoints3.getPoint(0);
-        Point p6 = testPoints3.getPoint(1);
+
         //2. Create set differences based on the points.
-        int diffX1 = p2.x - p1.x;
-        int diffY1 = p2.y - p1.y;
-        int diffX2 = p4.x - p3.x;
-        int diffY2 = p4.y - p3.y;
-        int diffX3 = p6.x - p5.x;
-        int diffY3 = p6.y - p5.y;
-        //Perform the implementation
-        double result1 = (double)diffX1 / diffY1;
-        double result2 = (double)diffX2 / diffY2;
-        double result3 = (double)diffX3 / diffY3;
-        assertEquals("Slope calculations may be wrong",-((double)4/3),result1,0.0001);
-        assertEquals("Slope calculations may be wrong",-(double)0,result2,0.0001);
-        assertEquals("Slope calculations may be wrong",Double.POSITIVE_INFINITY,result3,0.0001);
+        double result2 = testPoints2.slope();
+        double result3 = testPoints3.slope();
+
+        //A bug has been found without assert. Exception: Divide by zero
+        //Solution 1: Make this assertion: x2 = x1: slope is infinity, adjust or + and -
+        //Solution 2: If y2 = y1 slope is 0.
+        //I assume that there are more bugs to handle: Flipped slope formula
+        assertEquals("The Slope equation is not working", 0,result2,0.0001);
+        assertEquals("The Slope equation is not working", Double.POSITIVE_INFINITY,result3,0.0001);
+        //Those cases are done, let's check out a random value
+
+
+
     }
 }
