@@ -136,6 +136,16 @@ public class TwoPointsTest {
         assertEquals("The Slope equation is not working", Double.POSITIVE_INFINITY,result3,0.0001);
         //Those cases are done, let's check out a random value
 
+        TwoPoints testPoints1 = new TwoPoints();
+        testPoints1.setPoint(0,7,3);
+        testPoints1.setPoint(1,1,-5);
+        Point p1 = testPoints1.getPoint(0);
+        Point p2 = testPoints1.getPoint(1);
+        int testXDiff = p2.x - p1.x;
+        int testYDiff = p2.y - p1.y;
+        double result1 = (double) testYDiff/testXDiff;
+        assertEquals("The Slope equation is not working", result1,testPoints1.slope(),0.0001);
+        //That confirms the flipped slope (x/y)
 
 
     }

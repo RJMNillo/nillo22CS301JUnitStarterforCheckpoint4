@@ -60,43 +60,45 @@ public class TwoPoints {
      * @return the slope or 0 if the points are equal */
     public double slope() {
         double result = 0.0;
-        if (points[0] == points[1]) {
-            return result;
-        }
+        //if (points[0] == points[1]) {
+            //return result;
+        //}
 
-        int xDiff = points[0].x - points[1].x;
-        int yDiff = points[0].y - points[1].y;
+        //int xDiff = points[0].x - points[1].x;
+        //int yDiff = points[0].y - points[1].y;
 
-        result = xDiff / yDiff;
+        //result = xDiff / yDiff;
         //--------------------------------------------------------------
         //NEW CODE
         //--------------------------------------------------------------
 
         //1. find xDiff and yDiff
-        //int xDiff = points[1].x - points[0].x;
-        //int yDiff = points[1].y - points[0].y;
+        int xDiff = points[1].x - points[0].x;
+        int yDiff = points[1].y - points[0].y;
         //2. Make first assertions
         //CASE 1: yDiff is zero
-        //if (yDiff == 0)
-       //{
-            //return result;
-        //}
+        if (yDiff == 0)
+        {
+            return result;
+        }
         //CASE 2: xDiff is zero
-        //if (xDiff == 0)
-        //{
-            //if(yDiff > 0)
-            //{
-                //return Double.POSITIVE_INFINITY;
-            //}
-            //else
-            //{
-                //return Double.NEGATIVE_INFINITY;
-            //}
-        //}
-        //else
-        //{
-            //result = (double) xDiff/yDiff;
-        //}
+        if (xDiff == 0)
+        {
+            if(yDiff > 0)
+            {
+                return Double.POSITIVE_INFINITY;
+            }
+            else
+            {
+                return Double.NEGATIVE_INFINITY;
+            }
+        }
+        else
+        {
+            //Copied from previous block: BUG
+            //Solution: switch the numerator and denominator
+            result = (double) yDiff/xDiff;
+        }
 
         return result;
     }
