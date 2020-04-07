@@ -90,5 +90,12 @@ public class TwoPointsTest {
         int diffY2 = p4.y - p3.y;
         int diffX3 = p6.x - p5.x;
         int diffY3 = p6.y - p5.y;
+        //Perform the implementation
+        double result1 = (double)diffX1 / diffY1;
+        double result2 = (double)diffX2 / diffY2;
+        double result3 = (double)diffX3 / diffY3;
+        assertEquals("Slope calculations may be wrong",-((double)4/3),result1,0.0001);
+        assertEquals("Slope calculations may be wrong",-(double)0,result2,0.0001);
+        assertEquals("Slope calculations may be wrong",Double.POSITIVE_INFINITY,result3,0.0001);
     }
 }
