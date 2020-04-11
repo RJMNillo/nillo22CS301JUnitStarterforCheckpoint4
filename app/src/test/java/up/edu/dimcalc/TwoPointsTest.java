@@ -47,10 +47,13 @@ public class TwoPointsTest {
         //Give the values to the points
         Point p1 = testPoints.getPoint(0);
         Point p2 = testPoints.getPoint(1);
-        assertEquals("randomValue does not equal",testPoints.getPoint(0).x,p1.x);
-        assertEquals("randomValue does not equal",testPoints.getPoint(0).y,p1.y);
-        assertEquals("randomValue does not equal",testPoints.getPoint(1).x,p2.x);
-        assertEquals("randomValue does not equal",testPoints.getPoint(1).y,p2.y);
+        Random someRandom = new Random();
+        int randomNumber = someRandom.nextInt(20)-10;
+        assertEquals("setOrigin does not equal",randomNumber,p1.x,19);
+        assertEquals("setOrigin does not equal",randomNumber,p1.y,19);
+        assertEquals("setOrigin does not equal",randomNumber,p2.x,19);
+        assertEquals("setOrigin does not equal",randomNumber,p2.y,19);
+
     }
 
     @Test
@@ -63,10 +66,11 @@ public class TwoPointsTest {
         //Get those points ya yeet
         Point p1 = testPoints.getPoint(0);
         Point p2 = testPoints.getPoint(1);
-        assertEquals("setOrigin does not equal",testPoints.getPoint(0).x,p1.x);
-        assertEquals("setOrigin does not equal",testPoints.getPoint(0).y,p1.y);
-        assertEquals("setOrigin does not equal",testPoints.getPoint(1).x,p2.x);
-        assertEquals("setOrigin does not equal",testPoints.getPoint(1).y,p2.y);
+        assertEquals("randomValue does not equal",0,p1.x);
+        assertEquals("randomValue does not equal",0,p1.y);
+        assertEquals("randomValue does not equal",0,p2.x);
+        assertEquals("randomValue does not equal",0,p2.y);
+
 
     }
 
